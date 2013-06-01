@@ -18,20 +18,22 @@ class CakeListEntity(CakeEntity):
     CAKE_TYPE_CHOICES_LOOKUP = dict(Cake.CAKE_TYPE_CHOICES)
 
     resource_id = fields.IntegerField(attr='pk')
-    cake_type = fields.CharField(attr='cake_type')
+    cake_type = fields.CharField()
 
     def process_cake_type(self, cake_type):
         return self.CAKE_TYPE_CHOICES_LOOKUP.get(cake_type, 'Unknown')
 
+
 class PointEntity(Entity):
-    x = fields.IntegerField(attr='x')
-    y = fields.IntegerField(attr='y')
+    x = fields.IntegerField()
+    y = fields.IntegerField()
 
 
 class CakePointListEntity(CakeListEntity):
-    point = fields.EntityField(attr='point', entity_cls=PointEntity)
+    point = fields.EntityField(entity_cls=PointEntity)
+    points = fields.EntityListField(entity_cls=PointEntity)
 
 
 class CakeDetailEntity(CakeListEntity):
-    message = fields.CharField(attr='message')
+    message = fields.CharField()
 

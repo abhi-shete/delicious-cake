@@ -141,7 +141,7 @@ class FileField(ApiField):
             return None
 
         try:
-            # Try to return the URL if it's a ``File``, falling back to the 
+            # Try to return the URL if it's a ``File``, falling back to the
             # string itself if it's been overridden or is a default.
             return getattr(value, 'url', value)
         except ValueError:
@@ -306,3 +306,11 @@ class EntityField(ApiField):
     def convert(self, value):
         if value is not None:
             return self.entity_cls(value).full_process()
+
+
+class EntityListField(EntityField):
+    processed_type = 'list'
+
+    def convert(self, value):
+        if value is not None:
+            return [self.entity_cls(obj).full_process() for obj in value]

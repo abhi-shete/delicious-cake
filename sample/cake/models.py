@@ -22,5 +22,8 @@ class Cake(models.Model):
 
     point = Point(x=42, y=7, parrot=u'Norwegian Blue')
 
+    points = [Point(x=42, y=7, parrot=u'Norwegian Blue'),
+              Point(x=8, y=8, parrot=u'Hegemony')]
+
     message = models.CharField(max_length=128)
     cake_type = models.PositiveSmallIntegerField(db_index=True)
